@@ -5,6 +5,13 @@ if($_SERVER['REQUEST_METHOD']=="POST")
 {
   $username=$_POST['username'];
   $password=$_POST['password'];
+  $password1=$_POST['password1'];
+    if($password!=$password1)
+    {
+        header("Location:register.html");
+        
+    }
+    $password=hash('ripemd160',$password);
   $id="";
  $choice=0;
     for($i=0;$i<10;$i++)
@@ -26,7 +33,7 @@ if($_SERVER['REQUEST_METHOD']=="POST")
    mysqli_query($conn,$sql);
 
  
-  
+  header("Location:login.html");
     
 }
 ?>

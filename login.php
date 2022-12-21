@@ -9,6 +9,7 @@ if($_SERVER['REQUEST_METHOD']=="POST")
     
   $username=$_POST['username'];
   $password=$_POST['password'];
+    $password=hash('ripemd160',$password);
   $sql="Select * from users Where Username='$username' and Password='$password'";
   $result=mysqli_query($conn,$sql);
     
@@ -19,8 +20,8 @@ if($_SERVER['REQUEST_METHOD']=="POST")
   $count=mysqli_num_rows($result);
   if($count==1)
   {
-      $_SESSION['name']=$username;
-      $_SESSION['pass']=$password;
+      $_SESSION['username']=$username;
+      $_SESSION['password']=$password;
      header("Location:index.php");
   }else
   {
